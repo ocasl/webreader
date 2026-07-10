@@ -1,0 +1,1 @@
+{"name": "com.webreader.host", "description": "webreader Native Messaging Host", "path": "REPLACE_WITH_FULL_PATH_TO_host.py", "type": "stdio", "allowed_origins": ["chrome-extension://REPLACE_WITH_EXTENSION_ID/"]}

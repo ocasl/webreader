@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Virtual environments
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright
+playwright-report/
+test-results/
+
+# Extension build artifacts
+extension/*.crx
+extension/*.pem
+extension/key.pem
+
+# Logs
+*.log
+
+# Local profile data (browser user-data)
+webreader-edge-profile/
+
+# Coverage
+htmlcov/
+.coverage
+.pytest_cache/
+
+# Distribution
+*.whl
+*.tar.gz

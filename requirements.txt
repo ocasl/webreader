@@ -1,0 +1,4 @@
+playwright>=1.40
+markdownify>=0.14
+rich>=13.0
+click>=8.1

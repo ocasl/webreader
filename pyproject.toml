@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "webreader"
+version = "0.1.0"
+description = "Read any webpage through your own logged-in browser. Open-source dokobot alternative."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "webreader contributors"}
+]
+keywords = ["web-scraping", "browser-automation", "cli", "chrome-extension", "login-wall", "markdown"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "playwright>=1.40",
+    "markdownify>=0.14",
+    "rich>=13.0",
+    "click>=8.1",
+]
+
+[project.scripts]
+webreader = "webreader.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/YOUR_USER/webreader"
+Repository = "https://github.com/YOUR_USER/webreader"
+Issues = "https://github.com/YOUR_USER/webreader/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["webreader*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
