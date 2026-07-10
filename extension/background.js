@@ -291,9 +291,15 @@ async function readTab(tabId, options = {}) {
   let error;
   
   try {
+    // Step 1: Attach debugger to the tab
     await attachDebugger(tabId);
+    
+    // Step 2: Extract content via Debugger API (no Native Host needed!)
     content = await extractViaDebugger(tabId);
+    
+    // Step 3: Detach
     await detachDebugger(tabId);
+    
   } catch (e) {
     error = e.message || String(e);
     try { await detachDebugger(tabId); } catch (_) {}
@@ -301,45 +307,16 @@ async function readTab(tabId, options = {}) {
   
   if (error) throw new Error(error);
   
-  // Try sending via native host for markdown processing
-  const port = connectToNativeHost();
-  if (port && content) {
-    try {
-      return await new Promise((resolve, reject) => {
-        const timer = setTimeout(() => {
-          reject(new Error("Native host timeout"));
-        }, timeout);
-        
-        const listener = (msg) => {
-          clearTimeout(timer);
-          port.onMessage.removeListener(listener);
-          resolve(msg);
-        };
-        
-        port.onMessage.addListener(listener);
-        port.postMessage({
-          type: "read",
-          url: tab.url || "",
-          title: tab.title || "",
-          html: content.rawHtml || "",
-          text: content.text || "",
-          markdown: content.markdown || "",  // Pre-extracted if available
-          options: options,
-        });
-      });
-    } catch (e) {
-      // Fall through to returning raw content
-    }
-  }
-  
-  // No native host — return what we got directly
+  // Return directly — no native host needed for extension mode
   return {
     type: "read_result",
     url: tab.url || "",
     title: tab.title || "",
-    markdown: content?.markdown || content?.text || "",
     text: content?.text || "",
-    source: "debugger_only",
+    markdown: content?.text || "",   // Plain text as markdown fallback
+    source: "chrome_debugger",
+    word_count: content?.wordCount || 0,
+    elapsed_ms: content?.elapsedMs || 0,
   };
 }
 
