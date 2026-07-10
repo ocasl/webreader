@@ -1,0 +1,1 @@
+{"name": "com.webreader.host", "description": "webreader Native Messaging Host", "path": "E:\\BBBBB\\webreader\\native_host\\host.bat", "type": "stdio", "allowed_origins": ["chrome-extension://*"]}
